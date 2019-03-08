@@ -13,6 +13,7 @@
 		7A9AC8F42231FDB900965B9B /* NoteMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC8F22231FDB900965B9B /* NoteMe.xcdatamodeld */; };
 		7A9AC8F62231FDC000965B9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A9AC8F52231FDC000965B9B /* Assets.xcassets */; };
 		7A9AC8F92231FDC000965B9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9AC8F72231FDC000965B9B /* LaunchScreen.storyboard */; };
+		7A9AC90822320E2700965B9B /* CoreDataBroker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC90722320E2700965B9B /* CoreDataBroker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7A9AC8F52231FDC000965B9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A9AC8F82231FDC000965B9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A9AC8FA2231FDC000965B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A9AC90722320E2700965B9B /* CoreDataBroker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBroker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +58,14 @@
 		7A9AC8EA2231FDB900965B9B /* NoteMe */ = {
 			isa = PBXGroup;
 			children = (
+				7A9AC90622320DD400965B9B /* Brokers */,
 				7A9AC9002232092E00965B9B /* Model */,
 				7A9AC9012232093800965B9B /* View */,
 				7A9AC9022232094B00965B9B /* Controller */,
 				7A9AC903223209DF00965B9B /* Storyboards */,
 				7A9AC90422320A3400965B9B /* Resources */,
+				7A9AC909223214CC00965B9B /* Data */,
 				7A9AC8FA2231FDC000965B9B /* Info.plist */,
-				7A9AC8F22231FDB900965B9B /* NoteMe.xcdatamodeld */,
 			);
 			path = NoteMe;
 			sourceTree = "<group>";
@@ -113,6 +116,22 @@
 				7A9AC8EB2231FDB900965B9B /* AppDelegate.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		7A9AC90622320DD400965B9B /* Brokers */ = {
+			isa = PBXGroup;
+			children = (
+				7A9AC90722320E2700965B9B /* CoreDataBroker.swift */,
+			);
+			path = Brokers;
+			sourceTree = "<group>";
+		};
+		7A9AC909223214CC00965B9B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7A9AC8F22231FDB900965B9B /* NoteMe.xcdatamodeld */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +208,7 @@
 				7A9AC8EE2231FDB900965B9B /* ViewController.swift in Sources */,
 				7A9AC8F42231FDB900965B9B /* NoteMe.xcdatamodeld in Sources */,
 				7A9AC8EC2231FDB900965B9B /* AppDelegate.swift in Sources */,
+				7A9AC90822320E2700965B9B /* CoreDataBroker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
