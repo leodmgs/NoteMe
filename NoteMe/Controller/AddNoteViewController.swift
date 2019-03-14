@@ -83,13 +83,23 @@ class AddNoteViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "Add Note"
-        let backButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(onBackTapped))
-        navigationItem.leftBarButtonItem = backButtonItem
+        let saveButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSaveTapped))
+        let discardButtonItem = UIBarButtonItem(title: "Discard", style: .plain, target: self, action: #selector(onDiscardChangesTapped))
+        navigationItem.leftBarButtonItem = saveButtonItem
+        navigationItem.rightBarButtonItem = discardButtonItem
     }
     
-    @objc private func onBackTapped() {
-        saveChanges()
+    @objc private func onDiscardChangesTapped() {
+        popViewController()
+    }
+    
+    private func popViewController() {
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func onSaveTapped() {
+        saveChanges()
+        popViewController()
     }
     
     private func saveChanges() {
