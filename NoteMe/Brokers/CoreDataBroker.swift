@@ -15,7 +15,7 @@ class CoreDataBroker {
     
     private let modelName: String
     
-    private (set) lazy var managedobjectContext: NSManagedObjectContext = {
+    private (set) lazy var managedObjectContext: NSManagedObjectContext = {
         let managedobjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedobjectContext.persistentStoreCoordinator =
             self.persistentStoreCoordinator
