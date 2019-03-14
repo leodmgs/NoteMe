@@ -11,6 +11,12 @@ import CoreData
 
 class NoteViewController: UIViewController {
 
+    private var notes: [Note]? {
+        didSet {
+            notesDidChange()
+        }
+    }
+    
     var coreDataBroker: CoreDataBroker = {
         let coreData = CoreDataBroker(modelName: "NoteMe")
         return coreData
@@ -19,22 +25,11 @@ class NoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        if let entityDesc = NSEntityDescription.entity(forEntityName: "Note", in: self.coreDataBroker.managedObjectContext) {
-            print(entityDesc.name ?? "No name")
-            print(entityDesc.description)
-            let note = NSManagedObject(entity: entityDesc, insertInto: self.coreDataBroker.managedObjectContext)
-            note.setValue("This is the fucking first Note!", forKey: "title")
-            note.setValue(NSDate(), forKey: "createdAt")
-            note.setValue(NSDate(), forKey: "updatedAt")
-            print(note)
-            do {
-                try self.coreDataBroker.managedObjectContext.save()
-            } catch {
-                print("Unable to save managed object context")
-                print("\(error), \(error.localizedDescription)")
-            }
-        }
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchNotes()
     }
     
     private func setupNavigationBar() {
@@ -56,6 +51,35 @@ class NoteViewController: UIViewController {
     private func setupView() {
         DispatchQueue.main.async {
             self.view.backgroundColor = .white
+        }
+    }
+    
+    private func notesDidChange() {
+//        printAllNotesToConsole()
+    }
+    
+    func printAllNotesToConsole() {
+        if let notes = self.notes {
+            for note in notes {
+                print(note.title!)
+            }
+        }
+    }
+    
+    private func fetchNotes() {
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(
+            key: #keyPath(Note.updatedAt), ascending: false)]
+        coreDataBroker.managedObjectContext.performAndWait {
+            do {
+                let notes = try fetchRequest.execute()
+                self.notes = notes
+                printAllNotesToConsole()
+            } catch {
+                let fetchError = error as NSError
+                print("Unable to Execute Fetch Request")
+                print("\(fetchError), \(fetchError.localizedDescription)")
+            }
         }
     }
 
