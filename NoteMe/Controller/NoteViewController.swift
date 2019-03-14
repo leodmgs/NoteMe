@@ -49,6 +49,7 @@ class NoteViewController: UIViewController {
     @objc private func onAddNoteTapped() {
         guard let navController = navigationController else { return }
         let addNoteViewController = AddNoteViewController()
+        addNoteViewController.managedObjectContext = coreDataBroker.managedObjectContext
         navController.pushViewController(addNoteViewController, animated: true)
     }
 

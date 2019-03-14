@@ -8,8 +8,11 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class AddNoteViewController: UIViewController {
+    
+    var managedObjectContext: NSManagedObjectContext?
     
     let titleTextField: UITextField = {
         let textField = UITextField()
@@ -85,7 +88,32 @@ class AddNoteViewController: UIViewController {
     }
     
     @objc private func onBackTapped() {
+        saveChanges()
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    private func saveChanges() {
+        guard let managedObjectContext = managedObjectContext else { return }
+        guard let noteTitle = titleTextField.text, !noteTitle.isEmpty else {
+            showAlert(
+                title: "Title missing!",
+                message: "You need to fill in a title for this note.")
+            return
+        }
+        let note = Note(context: managedObjectContext)
+        note.title = noteTitle
+        note.createdAt = Date()
+        note.updatedAt = Date()
+        note.contents = contentsTextView.text
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
