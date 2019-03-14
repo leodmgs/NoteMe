@@ -18,6 +18,7 @@ class NoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         if let entityDesc = NSEntityDescription.entity(forEntityName: "Note", in: self.coreDataBroker.managedObjectContext) {
             print(entityDesc.name ?? "No name")
             print(entityDesc.description)
@@ -34,6 +35,21 @@ class NoteViewController: UIViewController {
             }
         }
         setupView()
+    }
+    
+    private func setupNavigationBar() {
+        guard let navController = navigationController else { return }
+        navController.navigationBar.isTranslucent = false
+        navController.navigationBar.topItem?.title = "NoteMe"
+        let addNoteButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(onAddNoteTapped))
+        navigationItem.rightBarButtonItem = addNoteButtonItem
+    }
+    
+    @objc private func onAddNoteTapped() {
+        guard let navController = navigationController else { return }
+        let addNoteViewController = AddNoteViewController()
+        navController.pushViewController(addNoteViewController, animated: true)
     }
 
     private func setupView() {
