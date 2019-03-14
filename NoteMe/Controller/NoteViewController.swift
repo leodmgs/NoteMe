@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class NoteViewController: UIViewController {
 
     var coreDataBroker: CoreDataBroker = {
         let coreData = CoreDataBroker(modelName: "NoteMe")
