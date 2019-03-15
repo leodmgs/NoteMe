@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    
+    static let noteLightGray = UIColor(
+        red: 0.92, green: 0.92, blue: 0.93, alpha: 1.0)
+    
     static let noteWhite = UIColor(
         red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
     
