@@ -81,6 +81,14 @@ class NotesViewController: UIViewController {
         }
     }
     
+    func onNoteSelected(_ note: Note) {
+        guard let navController = navigationController else { return }
+        let editNoteViewController = EditNoteViewController()
+        editNoteViewController.note = note
+        editNoteViewController.managedObjectContext = coreDataBroker.managedObjectContext
+        navController.pushViewController(editNoteViewController, animated: true)
+    }
+    
     private func fetchNotes() {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(

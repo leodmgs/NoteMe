@@ -43,4 +43,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         return CGFloat(60)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let indexPath = tableView.indexPathForSelectedRow, let note = self.notes?[indexPath.row] else { return }
+        onNoteSelected(note)
+    }
+    
 }
