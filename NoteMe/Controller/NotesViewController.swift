@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class NoteViewController: UIViewController {
+class NotesViewController: UIViewController {
 
-    private var notes: [Note]? {
+    var notes: [Note]? {
         didSet {
             notesDidChange()
         }
@@ -22,14 +22,33 @@ class NoteViewController: UIViewController {
         return coreData
     }()
     
+    private lazy var notesView: UINotesView = {
+        let view = UINotesView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.notesTableView.delegate = self
+        view.notesTableView.dataSource = self
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupView()
+        setupNotificationsHandling()
+        fetchNotes()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        fetchNotes()
+    private func setupNotificationsHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(managedObjectContextDidChange),
+            name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+            object: nil)
+    }
+    
+    @objc private func managedObjectContextDidChange() {
+        self.fetchNotes()
     }
     
     private func setupNavigationBar() {
@@ -52,17 +71,13 @@ class NoteViewController: UIViewController {
         DispatchQueue.main.async {
             self.view.backgroundColor = .white
         }
+        view.addSubview(notesView)
+        activateRegularConstraints()
     }
     
     private func notesDidChange() {
-//        printAllNotesToConsole()
-    }
-    
-    func printAllNotesToConsole() {
-        if let notes = self.notes {
-            for note in notes {
-                print(note.title!)
-            }
+        DispatchQueue.main.async {
+            self.notesView.notesTableView.reloadData()
         }
     }
     
@@ -74,13 +89,21 @@ class NoteViewController: UIViewController {
             do {
                 let notes = try fetchRequest.execute()
                 self.notes = notes
-                printAllNotesToConsole()
             } catch {
                 let fetchError = error as NSError
                 print("Unable to Execute Fetch Request")
                 print("\(fetchError), \(fetchError.localizedDescription)")
             }
         }
+    }
+    
+    private func activateRegularConstraints() {
+        NSLayoutConstraint.activate([
+            notesView.topAnchor.constraint(equalTo: view.topAnchor),
+            notesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            notesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            notesView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
 
 }
