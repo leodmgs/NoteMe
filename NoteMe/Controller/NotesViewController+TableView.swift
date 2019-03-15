@@ -26,6 +26,19 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(
         _ tableView: UITableView,
+        viewForHeaderInSection section: Int) -> UIView? {
+        let noteHeaderCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotesHeaderCell.identifier) as! NotesHeaderCell
+        return noteHeaderCell
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(60)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(60)
     }

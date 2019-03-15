@@ -24,6 +24,8 @@ class UINotesView: UIView {
         super.init(frame: frame)
         notesTableView.register(
             NoteCell.self, forCellReuseIdentifier: NoteCell.identifier)
+        notesTableView.register(
+            NotesHeaderCell.self, forHeaderFooterViewReuseIdentifier: NotesHeaderCell.identifier)
         setupView()
     }
     
@@ -38,7 +40,8 @@ class UINotesView: UIView {
     
     private func activateRegularConstraints() {
         NSLayoutConstraint.activate([
-            notesTableView.topAnchor.constraint(equalTo: self.topAnchor),
+            notesTableView.topAnchor.constraint(
+                equalTo: self.topAnchor, constant: 20),
             notesTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             notesTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             notesTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
