@@ -14,26 +14,11 @@ class AddNoteViewController: UIViewController {
     
     var managedObjectContext: NSManagedObjectContext?
     
-    let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Title"
-        return textField
-    }()
-    
-    let bottomLine: UIView = {
-        let view = UIView()
+    lazy var noteView: NoteView = {
+        let view = NoteView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .lightGray
+        view.contentsTextView.delegate = self
         return view
-    }()
-    
-    let contentsTextView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = "Write something here!"
-        textView.textColor = .lightGray
-        return textView
     }()
     
     override func viewDidLoad() {
@@ -46,50 +31,32 @@ class AddNoteViewController: UIViewController {
         DispatchQueue.main.async {
             self.view.backgroundColor = .white
         }
-        titleTextField.addSubview(bottomLine)
-        view.addSubview(titleTextField)
-        view.addSubview(contentsTextView)
-        contentsTextView.delegate = self
+        view.addSubview(noteView)
         activateRegularConstraints()
     }
     
     private func activateRegularConstraints() {
         NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.topAnchor, constant: 28),
-            titleTextField.leadingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 8),
-            titleTextField.trailingAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -8),
-            
-            bottomLine.topAnchor.constraint(
-                equalTo: titleTextField.bottomAnchor),
-            bottomLine.leadingAnchor.constraint(
-                equalTo: titleTextField.leadingAnchor),
-            bottomLine.trailingAnchor.constraint(
-                equalTo: titleTextField.trailingAnchor),
-            bottomLine.heightAnchor.constraint(equalToConstant: 0.2),
-            
-            contentsTextView.topAnchor.constraint(
-                equalTo: titleTextField.bottomAnchor, constant: 20),
-            contentsTextView.leadingAnchor.constraint(
-                equalTo: titleTextField.leadingAnchor),
-            contentsTextView.trailingAnchor.constraint(
-                equalTo: titleTextField.trailingAnchor),
-            contentsTextView.bottomAnchor.constraint(
-                equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -8)
+            noteView.topAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.topAnchor),
+            noteView.leadingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leadingAnchor),
+            noteView.trailingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.trailingAnchor),
+            noteView.bottomAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.bottomAnchor)
             ])
     }
     
     private func setupNavigationBar() {
         navigationItem.title = "Add Note"
         let saveButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSaveTapped))
-        let discardButtonItem = UIBarButtonItem(title: "Discard", style: .plain, target: self, action: #selector(onDiscardChangesTapped))
+        let discardButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onCancelTapped))
         navigationItem.leftBarButtonItem = saveButtonItem
         navigationItem.rightBarButtonItem = discardButtonItem
     }
     
-    @objc private func onDiscardChangesTapped() {
+    @objc private func onCancelTapped() {
         popViewController()
     }
     
@@ -98,32 +65,27 @@ class AddNoteViewController: UIViewController {
     }
     
     @objc private func onSaveTapped() {
-        saveChanges()
+        saveNote()
         popViewController()
     }
     
-    private func saveChanges() {
+    private func saveNote() {
         guard let managedObjectContext = managedObjectContext else { return }
-        guard let noteTitle = titleTextField.text, !noteTitle.isEmpty else {
-            showAlert(
+        guard let noteTitle = noteView.titleTextField.text, !noteTitle.isEmpty else {
+            let alert = noteView.showAlertForNote(
                 title: "Title missing!",
-                message: "You need to fill in a title for this note.")
+                message: "You need to fill in a title for this note.",
+                options: nil)
+            if let alert = alert {
+                self.present(alert, animated: true, completion: nil)
+            }
             return
         }
         let note = Note(context: managedObjectContext)
         note.title = noteTitle
         note.createdAt = Date()
         note.updatedAt = Date()
-        note.contents = contentsTextView.text
-    }
-    
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        note.contents = noteView.contentsTextView.text
     }
     
 }
