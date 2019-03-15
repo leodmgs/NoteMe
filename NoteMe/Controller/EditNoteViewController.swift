@@ -14,6 +14,19 @@ class EditNoteViewController: UIViewController {
     
     var managedObjectContext: NSManagedObjectContext?
     
+    var note: Note? {
+        didSet {
+            guard let noteObject = note else { return }
+            noteView.titleTextField.text = noteObject.title
+            if let contents = noteObject.contents {
+                if contents.count > 0 {
+                    noteView.contentsTextView.textColor = .black
+                }
+                noteView.contentsTextView.text = contents
+            }
+        }
+    }
+    
     lazy var noteView: NoteView = {
         let view = NoteView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -66,11 +79,7 @@ class EditNoteViewController: UIViewController {
             }
             return
         }
-        let note = Note(context: managedObjectContext)
-        note.title = noteTitle
-        note.createdAt = Date()
-        note.updatedAt = Date()
-        note.contents = noteView.contentsTextView.text
+        // TODO: perform updates for note from here!
     }
     
     private func activateRegularConstraints() {
