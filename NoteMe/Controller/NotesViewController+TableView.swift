@@ -35,7 +35,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         viewForHeaderInSection section: Int) -> UIView? {
-        let noteHeaderCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotesHeaderCell.identifier) as! NotesHeaderCell
+        let noteHeaderCell = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: NotesHeaderCell.identifier) as! NotesHeaderCell
         return noteHeaderCell
     }
     
@@ -56,7 +57,10 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         onNoteSelected(note)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let note = fetchedResultsController.object(at: indexPath)
             coreDataBroker.managedObjectContext.delete(note)

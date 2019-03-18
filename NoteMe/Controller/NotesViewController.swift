@@ -22,6 +22,11 @@ class NotesViewController: UIViewController {
         return coreData
     }()
     
+    /*
+     FetchedResultsController takes care of observing the managed object context
+     it's tied to and it only notifies its delegate when it's appropriate to
+     update the UI.
+     */
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(
@@ -31,6 +36,10 @@ class NotesViewController: UIViewController {
             managedObjectContext: coreDataBroker.managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
+        /*
+         An extension of this class implements NSFetchedResultsControllerDelegate
+         that is responsible for the updates in TableView.
+        */
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
@@ -87,6 +96,11 @@ class NotesViewController: UIViewController {
         navController.pushViewController(editNoteViewController, animated: true)
     }
     
+    /*
+     Helper method to configure a NoteCell according to the object managed by
+     the FetchedResultsController. In this way, the Note object is obtained and
+     then the cell can be updated.
+     */
     func configure(_ cell: NoteCell, at indexPath: IndexPath) {
         let note = fetchedResultsController.object(at: indexPath)
         cell.titleLabel.text = note.title
@@ -94,6 +108,14 @@ class NotesViewController: UIViewController {
     
     private func fetchNotes() {
         do {
+            /*
+             Once the property 'fetchedResultsController' has an instance for
+             the NSFetchRequest and NSSortDescriptor (request data from the
+             managed object context and an organize descriptior for these data,
+             respectively), the fetch is performed through the call for the
+            'performFetch()' method. The results will be notified in the subs
+             for the delegate.
+             */
             try fetchedResultsController.performFetch()
         } catch {
             let fetchError = error as NSError

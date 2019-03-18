@@ -40,10 +40,18 @@ class EditNoteViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "Edit Note"
-        let saveButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSaveChangesTapped))
-        let discardButtonItem = UIBarButtonItem(title: "Discard", style: .plain, target: self, action: #selector(onDiscardChangesTapped))
-        navigationItem.leftBarButtonItem = saveButtonItem
-        navigationItem.rightBarButtonItem = discardButtonItem
+        let saveButtonItem = UIBarButtonItem(
+            title: "Save",
+            style: .plain,
+            target: self,
+            action: #selector(onSaveChangesTapped))
+        let discardButtonItem = UIBarButtonItem(
+            title: "Discard",
+            style: .plain,
+            target: self,
+            action: #selector(onDiscardChangesTapped))
+        navigationItem.rightBarButtonItem = saveButtonItem
+        navigationItem.leftBarButtonItem = discardButtonItem
     }
     
     private func setupView() {

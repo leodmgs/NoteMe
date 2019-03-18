@@ -12,6 +12,11 @@ import CoreData
 
 class AddNoteViewController: UIViewController {
     
+    /*
+     The instance of the managed object context is required in order to create
+     a Note object that will be managed by its context. The reference for this
+     object needs to be assigned before calling this class.
+     */
     var managedObjectContext: NSManagedObjectContext?
     
     lazy var noteView: NoteView = {
@@ -50,10 +55,18 @@ class AddNoteViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "Add Note"
-        let saveButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSaveTapped))
-        let discardButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onCancelTapped))
-        navigationItem.leftBarButtonItem = saveButtonItem
-        navigationItem.rightBarButtonItem = discardButtonItem
+        let saveButtonItem = UIBarButtonItem(
+            title: "Save",
+            style: .plain,
+            target: self,
+            action: #selector(onSaveTapped))
+        let discardButtonItem = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self,
+            action: #selector(onCancelTapped))
+        navigationItem.rightBarButtonItem = saveButtonItem
+        navigationItem.leftBarButtonItem = discardButtonItem
     }
     
     @objc private func onCancelTapped() {
@@ -70,6 +83,10 @@ class AddNoteViewController: UIViewController {
     }
     
     private func saveNote() {
+        /*
+         Unwrap the managed object context property to make sure that it has
+         been created and assigned properly for this class.
+         */
         guard let managedObjectContext = managedObjectContext else { return }
         guard let noteTitle = noteView.titleTextField.text, !noteTitle.isEmpty else {
             let alert = noteView.showAlertForNote(
@@ -81,6 +98,10 @@ class AddNoteViewController: UIViewController {
             }
             return
         }
+        /*
+         The Note object is created in the managed object context and its
+         properties are configured.
+         */
         let note = Note(context: managedObjectContext)
         note.title = noteTitle
         note.createdAt = Date()

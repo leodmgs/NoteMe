@@ -15,13 +15,27 @@ class CoreDataBroker {
     
     private let modelName: String
     
+    /*
+     A managed object context receives a model objects through a persistent store
+     coordinator (also an object of this class). In this way, the managed object
+     context can keeps a reference to the persistent store coordinator of the
+     application. The managed object context is responsible to create, reads,
+     updates and delete model objects.
+     */
     private (set) lazy var managedObjectContext: NSManagedObjectContext = {
-        let managedobjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        let managedobjectContext = NSManagedObjectContext(
+            concurrencyType: .mainQueueConcurrencyType)
         managedobjectContext.persistentStoreCoordinator =
             self.persistentStoreCoordinator
         return managedobjectContext
     }()
     
+    /*
+     This property represents the data model of the Core Data application. This
+     object is prepresented by a file in the application bundle that contains the
+     data schema of the app, i.e. the collection of entities, that has attributes
+     and relationships.
+     */
     private lazy var managedObjectModel: NSManagedObjectModel = {
         guard let modelUrl = Bundle.main.url(
             forResource: modelName, withExtension: "momd") else {
@@ -34,6 +48,11 @@ class CoreDataBroker {
         return managedObjectModel
     }()
     
+    /*
+     The persistent store coordinator keeps a reference to the managed object
+     model and every parent managed object context keeps a reference to the
+     persistent coordinator.
+     */
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(
             managedObjectModel: self.managedObjectModel)
@@ -67,8 +86,16 @@ class CoreDataBroker {
     
     private func setupNotificationsHandling() {
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.willTerminateNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(saveChanges), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(saveChanges),
+            name: UIApplication.willTerminateNotification,
+            object: nil)
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(saveChanges),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil)
     }
     
     @objc private func saveChanges() {

@@ -11,6 +11,7 @@
 		7A22A30D223BD2E100D85D81 /* NotesViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */; };
 		7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30E223BD5A400D85D81 /* UINotesView.swift */; };
 		7A22A312223BD61E00D85D81 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A311223BD61E00D85D81 /* NoteCell.swift */; };
+		7A5425F9223FC5C0007E6349 /* NoteMe+NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */; };
 		7A9AC8EC2231FDB900965B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC8EB2231FDB900965B9B /* AppDelegate.swift */; };
 		7A9AC8EE2231FDB900965B9B /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */; };
 		7A9AC8F12231FDB900965B9B /* NoteMe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9AC8EF2231FDB900965B9B /* NoteMe.storyboard */; };
@@ -19,6 +20,9 @@
 		7A9AC8F92231FDC000965B9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9AC8F72231FDC000965B9B /* LaunchScreen.storyboard */; };
 		7A9AC90822320E2700965B9B /* CoreDataBroker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC90722320E2700965B9B /* CoreDataBroker.swift */; };
 		7AFA2B5A223BEBCC0094CE20 /* NotesHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFA2B59223BEBCC0094CE20 /* NotesHeaderCell.swift */; };
+		7AFA2B5C223BFC3F0094CE20 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFA2B5B223BFC3F0094CE20 /* EditNoteViewController.swift */; };
+		7AFA2B5E223BFCCF0094CE20 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFA2B5D223BFCCF0094CE20 /* NoteView.swift */; };
+		7AFA2B61223C25DB0094CE20 /* NoteMe+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFA2B60223C25DB0094CE20 /* NoteMe+UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,7 @@
 		7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotesViewController+TableView.swift"; sourceTree = "<group>"; };
 		7A22A30E223BD5A400D85D81 /* UINotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINotesView.swift; sourceTree = "<group>"; };
 		7A22A311223BD61E00D85D81 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMe+NSManagedObject.swift"; sourceTree = "<group>"; };
 		7A9AC8E82231FDB900965B9B /* NoteMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9AC8EB2231FDB900965B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +41,9 @@
 		7A9AC8FA2231FDC000965B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A9AC90722320E2700965B9B /* CoreDataBroker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBroker.swift; sourceTree = "<group>"; };
 		7AFA2B59223BEBCC0094CE20 /* NotesHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesHeaderCell.swift; sourceTree = "<group>"; };
+		7AFA2B5B223BFC3F0094CE20 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
+		7AFA2B5D223BFCCF0094CE20 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		7AFA2B60223C25DB0094CE20 /* NoteMe+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMe+UIColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,7 @@
 		7A9AC8EA2231FDB900965B9B /* NoteMe */ = {
 			isa = PBXGroup;
 			children = (
+				7AFA2B5F223C25B10094CE20 /* Extensions */,
 				7A9AC90622320DD400965B9B /* Brokers */,
 				7A9AC9002232092E00965B9B /* Model */,
 				7A9AC9012232093800965B9B /* View */,
@@ -101,6 +110,7 @@
 			children = (
 				7A22A310223BD60E00D85D81 /* Cells */,
 				7A22A30E223BD5A400D85D81 /* UINotesView.swift */,
+				7AFA2B5D223BFCCF0094CE20 /* NoteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -110,6 +120,7 @@
 			children = (
 				7A9AC90522320AAF00965B9B /* Main */,
 				7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */,
+				7AFA2B5B223BFC3F0094CE20 /* EditNoteViewController.swift */,
 				7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */,
 				7A22A308223AA39400D85D81 /* AddNoteViewController.swift */,
 			);
@@ -155,6 +166,15 @@
 				7A9AC8F22231FDB900965B9B /* NoteMe.xcdatamodeld */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		7AFA2B5F223C25B10094CE20 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7AFA2B60223C25DB0094CE20 /* NoteMe+UIColor.swift */,
+				7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,10 +252,14 @@
 				7AFA2B5A223BEBCC0094CE20 /* NotesHeaderCell.swift in Sources */,
 				7A9AC8F42231FDB900965B9B /* NoteMe.xcdatamodeld in Sources */,
 				7A9AC8EC2231FDB900965B9B /* AppDelegate.swift in Sources */,
+				7AFA2B5E223BFCCF0094CE20 /* NoteView.swift in Sources */,
+				7A5425F9223FC5C0007E6349 /* NoteMe+NSManagedObject.swift in Sources */,
 				7A22A309223AA39400D85D81 /* AddNoteViewController.swift in Sources */,
 				7A22A30D223BD2E100D85D81 /* NotesViewController+TableView.swift in Sources */,
+				7AFA2B61223C25DB0094CE20 /* NoteMe+UIColor.swift in Sources */,
 				7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */,
 				7A9AC90822320E2700965B9B /* CoreDataBroker.swift in Sources */,
+				7AFA2B5C223BFC3F0094CE20 /* EditNoteViewController.swift in Sources */,
 				7A22A312223BD61E00D85D81 /* NoteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +321,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = G736GNRXH4;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -358,6 +383,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G736GNRXH4;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -382,6 +408,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G736GNRXH4;
 				INFOPLIST_FILE = NoteMe/Info.plist;
@@ -391,8 +418,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.leodmgs.NoteMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -400,6 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G736GNRXH4;
 				INFOPLIST_FILE = NoteMe/Info.plist;
@@ -409,8 +438,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.leodmgs.NoteMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
