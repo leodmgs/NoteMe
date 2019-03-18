@@ -48,4 +48,20 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         onNoteSelected(note)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let noteToRemove = notes?[indexPath.row] else {
+                let alert = UIAlertController(
+                    title: "Unable to remove Note",
+                    message: "This note cannot be removed from the storage.",
+                    preferredStyle: .alert)
+                alert.addAction(
+                    UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                return
+            }
+            coreDataBroker.managedObjectContext.delete(noteToRemove)
+            notes?.remove(at: indexPath.row)
+        }
+    }
+    
 }
