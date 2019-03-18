@@ -22,6 +22,19 @@ class NotesViewController: UIViewController {
         return coreData
     }()
     
+    lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(
+            key: #keyPath(Note.updatedAt), ascending: false)]
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: coreDataBroker.managedObjectContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        fetchedResultsController.delegate = self
+        return fetchedResultsController
+    }()
+    
     private lazy var notesView: UINotesView = {
         let view = UINotesView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,21 +47,7 @@ class NotesViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupView()
-        setupNotificationsHandling()
         fetchNotes()
-    }
-    
-    private func setupNotificationsHandling() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(managedObjectContextDidChange),
-            name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
-            object: nil)
-    }
-    
-    @objc private func managedObjectContextDidChange() {
-        self.fetchNotes()
     }
     
     private func setupNavigationBar() {
@@ -88,19 +87,18 @@ class NotesViewController: UIViewController {
         navController.pushViewController(editNoteViewController, animated: true)
     }
     
+    func configure(_ cell: NoteCell, at indexPath: IndexPath) {
+        let note = fetchedResultsController.object(at: indexPath)
+        cell.titleLabel.text = note.title
+    }
+    
     private func fetchNotes() {
-        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(
-            key: #keyPath(Note.updatedAt), ascending: false)]
-        coreDataBroker.managedObjectContext.performAndWait {
-            do {
-                let notes = try fetchRequest.execute()
-                self.notes = notes
-            } catch {
-                let fetchError = error as NSError
-                print("Unable to Execute Fetch Request")
-                print("\(fetchError), \(fetchError.localizedDescription)")
-            }
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            let fetchError = error as NSError
+            print("Unable to Execute Fetch Request")
+            print("\(fetchError), \(fetchError.localizedDescription)")
         }
     }
     
@@ -115,3 +113,47 @@ class NotesViewController: UIViewController {
 
 }
 
+extension NotesViewController: NSFetchedResultsControllerDelegate {
+
+    func controllerWillChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        notesView.notesTableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        notesView.notesTableView.endUpdates()
+    }
+    
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                notesView.notesTableView.insertRows(at: [indexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                notesView.notesTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath,
+                let cell = notesView.notesTableView.cellForRow(at: indexPath)
+                    as? NoteCell {
+                configure(cell, at: indexPath)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                notesView.notesTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            if let newIndexPath = newIndexPath {
+                notesView.notesTableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+        }
+    }
+    
+}

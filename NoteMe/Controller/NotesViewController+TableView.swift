@@ -10,9 +10,17 @@ import UIKit
 
 extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections.count
+    }
+    
     func tableView(
         _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.notes?.count ?? 0
+        guard let section = fetchedResultsController.sections?[section] else {
+            return 0
+        }
+        return section.numberOfObjects
     }
     
     func tableView(
@@ -20,7 +28,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let noteCell = tableView.dequeueReusableCell(
             withIdentifier: NoteCell.identifier, for: indexPath) as! NoteCell
-        noteCell.titleLabel.text = self.notes?[indexPath.row].title
+        configure(noteCell, at: indexPath)
         return noteCell
     }
     
@@ -44,22 +52,14 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let indexPath = tableView.indexPathForSelectedRow, let note = self.notes?[indexPath.row] else { return }
+        let note = fetchedResultsController.object(at: indexPath)
         onNoteSelected(note)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let noteToRemove = notes?[indexPath.row] else {
-                let alert = UIAlertController(
-                    title: "Unable to remove Note",
-                    message: "This note cannot be removed from the storage.",
-                    preferredStyle: .alert)
-                alert.addAction(
-                    UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                return
-            }
-            coreDataBroker.managedObjectContext.delete(noteToRemove)
+            let note = fetchedResultsController.object(at: indexPath)
+            coreDataBroker.managedObjectContext.delete(note)
             notes?.remove(at: indexPath.row)
         }
     }
