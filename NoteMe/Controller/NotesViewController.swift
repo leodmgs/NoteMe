@@ -85,7 +85,6 @@ class NotesViewController: UIViewController {
         guard let navController = navigationController else { return }
         let editNoteViewController = EditNoteViewController()
         editNoteViewController.note = note
-        editNoteViewController.managedObjectContext = coreDataBroker.managedObjectContext
         navController.pushViewController(editNoteViewController, animated: true)
     }
     

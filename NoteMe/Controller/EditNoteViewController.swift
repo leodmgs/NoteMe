@@ -12,8 +12,6 @@ import CoreData
 
 class EditNoteViewController: UIViewController {
     
-    var managedObjectContext: NSManagedObjectContext?
-    
     var note: Note? {
         didSet {
             guard let noteObject = note else { return }
@@ -68,18 +66,19 @@ class EditNoteViewController: UIViewController {
     }
     
     private func saveChanges() {
-        guard let managedObjectContext = managedObjectContext else { return }
         guard let noteTitle = noteView.titleTextField.text, !noteTitle.isEmpty else {
             let alert = noteView.showAlertForNote(
                 title: "Title missing!",
-                message: "You need to fill in a title for this note.",
+                message: "You need to provide a title for this note.",
                 options: nil)
             if let alert = alert {
                 self.present(alert, animated: true, completion: nil)
             }
             return
         }
-        // TODO: perform updates for note from here!
+        note?.title = noteTitle
+        note?.updatedAt = Date()
+        note?.contents = noteView.contentsTextView.text
     }
     
     private func activateRegularConstraints() {
