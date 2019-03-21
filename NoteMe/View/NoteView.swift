@@ -82,12 +82,12 @@ class NoteView: UIView {
                 equalTo: self.trailingAnchor, constant: -8),
             
             bottomLine.topAnchor.constraint(
-                equalTo: titleTextField.bottomAnchor),
+                equalTo: titleTextField.bottomAnchor, constant: 2),
             bottomLine.leadingAnchor.constraint(
                 equalTo: titleTextField.leadingAnchor),
             bottomLine.trailingAnchor.constraint(
                 equalTo: titleTextField.trailingAnchor),
-            bottomLine.heightAnchor.constraint(equalToConstant: 0.2),
+            bottomLine.heightAnchor.constraint(equalToConstant: 0.5),
             
             contentsTextView.topAnchor.constraint(
                 equalTo: titleTextField.bottomAnchor, constant: 20),
@@ -96,7 +96,7 @@ class NoteView: UIView {
             contentsTextView.trailingAnchor.constraint(
                 equalTo: titleTextField.trailingAnchor),
             contentsTextView.bottomAnchor.constraint(
-                equalTo: self.bottomAnchor, constant: -8)
+                equalTo: self.bottomAnchor, constant: -28)
             ])
     }
 }
