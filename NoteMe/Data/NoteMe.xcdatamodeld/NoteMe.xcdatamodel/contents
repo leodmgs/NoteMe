@@ -17,8 +17,8 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="tags" inverseEntity="Note" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Category" positionX="-111.953125" positionY="-47.578125" width="128" height="75"/>
         <element name="Note" positionX="71.2265625" positionY="-190.80078125" width="128" height="133"/>
-        <element name="Category" positionX="-111.953125" positionY="-47.578125" width="128" height="73"/>
         <element name="Tag" positionX="230.73828125" positionY="-29.984375" width="128" height="73"/>
     </elements>
 </model>

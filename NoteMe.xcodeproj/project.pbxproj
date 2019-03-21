@@ -12,6 +12,13 @@
 		7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30E223BD5A400D85D81 /* UINotesView.swift */; };
 		7A22A312223BD61E00D85D81 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A311223BD61E00D85D81 /* NoteCell.swift */; };
 		7A5425F9223FC5C0007E6349 /* NoteMe+NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */; };
+		7A5425FB2241331A007E6349 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425FA2241331A007E6349 /* CategoriesViewController.swift */; };
+		7A5425FD22413376007E6349 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425FC22413376007E6349 /* SettingsViewController.swift */; };
+		7A5425FF22417760007E6349 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425FE22417760007E6349 /* CategoryView.swift */; };
+		7A54260122417F52007E6349 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54260022417F52007E6349 /* AddCategoryViewController.swift */; };
+		7A5426032242E24F007E6349 /* CategoryColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5426022242E24F007E6349 /* CategoryColorView.swift */; };
+		7A5426052243CC4B007E6349 /* NoteMe+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5426042243CC4B007E6349 /* NoteMe+UIButton.swift */; };
+		7A5426072243E605007E6349 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5426062243E605007E6349 /* CategoryCell.swift */; };
 		7A9AC8EC2231FDB900965B9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC8EB2231FDB900965B9B /* AppDelegate.swift */; };
 		7A9AC8EE2231FDB900965B9B /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */; };
 		7A9AC8F12231FDB900965B9B /* NoteMe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9AC8EF2231FDB900965B9B /* NoteMe.storyboard */; };
@@ -31,6 +38,14 @@
 		7A22A30E223BD5A400D85D81 /* UINotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINotesView.swift; sourceTree = "<group>"; };
 		7A22A311223BD61E00D85D81 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMe+NSManagedObject.swift"; sourceTree = "<group>"; };
+		7A5425FA2241331A007E6349 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		7A5425FC22413376007E6349 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7A5425FE22417760007E6349 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		7A54260022417F52007E6349 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
+		7A5426022242E24F007E6349 /* CategoryColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColorView.swift; sourceTree = "<group>"; };
+		7A5426042243CC4B007E6349 /* NoteMe+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMe+UIButton.swift"; sourceTree = "<group>"; };
+		7A5426062243E605007E6349 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		7A542608224432F7007E6349 /* NoteMe 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "NoteMe 2.xcdatamodel"; sourceTree = "<group>"; };
 		7A9AC8E82231FDB900965B9B /* NoteMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9AC8EB2231FDB900965B9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				7A22A311223BD61E00D85D81 /* NoteCell.swift */,
+				7A5426062243E605007E6349 /* CategoryCell.swift */,
 				7AFA2B59223BEBCC0094CE20 /* NotesHeaderCell.swift */,
 			);
 			path = Cells;
@@ -110,6 +126,8 @@
 			children = (
 				7A22A310223BD60E00D85D81 /* Cells */,
 				7A22A30E223BD5A400D85D81 /* UINotesView.swift */,
+				7A5425FE22417760007E6349 /* CategoryView.swift */,
+				7A5426022242E24F007E6349 /* CategoryColorView.swift */,
 				7AFA2B5D223BFCCF0094CE20 /* NoteView.swift */,
 			);
 			path = View;
@@ -121,6 +139,9 @@
 				7A9AC90522320AAF00965B9B /* Main */,
 				7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */,
 				7AFA2B5B223BFC3F0094CE20 /* EditNoteViewController.swift */,
+				7A5425FA2241331A007E6349 /* CategoriesViewController.swift */,
+				7A54260022417F52007E6349 /* AddCategoryViewController.swift */,
+				7A5425FC22413376007E6349 /* SettingsViewController.swift */,
 				7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */,
 				7A22A308223AA39400D85D81 /* AddNoteViewController.swift */,
 			);
@@ -173,6 +194,7 @@
 			children = (
 				7AFA2B60223C25DB0094CE20 /* NoteMe+UIColor.swift */,
 				7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */,
+				7A5426042243CC4B007E6349 /* NoteMe+UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -252,15 +274,22 @@
 				7AFA2B5A223BEBCC0094CE20 /* NotesHeaderCell.swift in Sources */,
 				7A9AC8F42231FDB900965B9B /* NoteMe.xcdatamodeld in Sources */,
 				7A9AC8EC2231FDB900965B9B /* AppDelegate.swift in Sources */,
+				7A5426032242E24F007E6349 /* CategoryColorView.swift in Sources */,
 				7AFA2B5E223BFCCF0094CE20 /* NoteView.swift in Sources */,
 				7A5425F9223FC5C0007E6349 /* NoteMe+NSManagedObject.swift in Sources */,
+				7A5425FF22417760007E6349 /* CategoryView.swift in Sources */,
 				7A22A309223AA39400D85D81 /* AddNoteViewController.swift in Sources */,
 				7A22A30D223BD2E100D85D81 /* NotesViewController+TableView.swift in Sources */,
+				7A5425FD22413376007E6349 /* SettingsViewController.swift in Sources */,
 				7AFA2B61223C25DB0094CE20 /* NoteMe+UIColor.swift in Sources */,
+				7A5426052243CC4B007E6349 /* NoteMe+UIButton.swift in Sources */,
 				7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */,
 				7A9AC90822320E2700965B9B /* CoreDataBroker.swift in Sources */,
+				7A54260122417F52007E6349 /* AddCategoryViewController.swift in Sources */,
 				7AFA2B5C223BFC3F0094CE20 /* EditNoteViewController.swift in Sources */,
+				7A5425FB2241331A007E6349 /* CategoriesViewController.swift in Sources */,
 				7A22A312223BD61E00D85D81 /* NoteCell.swift in Sources */,
+				7A5426072243E605007E6349 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,9 +500,10 @@
 		7A9AC8F22231FDB900965B9B /* NoteMe.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7A542608224432F7007E6349 /* NoteMe 2.xcdatamodel */,
 				7A9AC8F32231FDB900965B9B /* NoteMe.xcdatamodel */,
 			);
-			currentVersion = 7A9AC8F32231FDB900965B9B /* NoteMe.xcdatamodel */;
+			currentVersion = 7A542608224432F7007E6349 /* NoteMe 2.xcdatamodel */;
 			path = NoteMe.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
