@@ -11,11 +11,7 @@ import CoreData
 
 class NotesViewController: UIViewController {
 
-    var notes: [Note]? {
-        didSet {
-            notesDidChange()
-        }
-    }
+    var notes: [Note]?
     
     var coreDataBroker: CoreDataBroker = {
         let coreData = CoreDataBroker(modelName: "NoteMe")
@@ -64,8 +60,23 @@ class NotesViewController: UIViewController {
         navController.navigationBar.isTranslucent = false
         navController.navigationBar.topItem?.title = "NoteMe"
         let addNoteButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(onAddNoteTapped))
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(onAddNoteTapped))
+        let settingsButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .edit,
+            target: self,
+            action: #selector(onSettingsTapped))
         navigationItem.rightBarButtonItem = addNoteButtonItem
+        navigationItem.leftBarButtonItem = settingsButtonItem
+    }
+    
+    @objc private func onSettingsTapped() {
+        guard let navController = navigationController else { return }
+        let settingsViewController = SettingsViewController()
+        settingsViewController.managedObjectContext =
+            coreDataBroker.managedObjectContext
+        navController.pushViewController(settingsViewController, animated: true)
     }
     
     @objc private func onAddNoteTapped() {
@@ -81,12 +92,6 @@ class NotesViewController: UIViewController {
         }
         view.addSubview(notesView)
         activateRegularConstraints()
-    }
-    
-    private func notesDidChange() {
-        DispatchQueue.main.async {
-            self.notesView.notesTableView.reloadData()
-        }
     }
     
     func onNoteSelected(_ note: Note) {
