@@ -7,3 +7,15 @@
 //
 
 import Foundation
+import UIKit
+
+extension UIButton {
+    func press() {
+        let press = CABasicAnimation(keyPath: "transform.scale")
+        press.duration = 0.5
+        press.toValue = 0.85
+        press.speed = 5
+        press.autoreverses = true
+        layer.add(press, forKey: nil)
+    }
+}
