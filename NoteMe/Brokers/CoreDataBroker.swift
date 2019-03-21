@@ -66,12 +66,17 @@ class CoreDataBroker {
         let persistentStoreUrl =
             documentsDirectoryUrl.appendingPathComponent(storeName)
         
+        // Allows lightweight migration, i.e., automatically.
+        let options = [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true
+        ]
         do {
             try persistentStoreCoordinator.addPersistentStore(
                 ofType: NSSQLiteStoreType,
                 configurationName: nil,
                 at: persistentStoreUrl,
-                options: nil)
+                options: options)
         } catch {
             fatalError("Unable to Add Persistent Store")
         }
