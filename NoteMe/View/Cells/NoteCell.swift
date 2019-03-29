@@ -19,6 +19,15 @@ class NoteCell: UITableViewCell {
         return label
     }()
     
+    let categoryLabel: EdgeInsetLabel = {
+        let label = EdgeInsetLabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.cornerRadius = 3
+        label.clipsToBounds = true
+        label.textInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCellView()
@@ -30,17 +39,21 @@ class NoteCell: UITableViewCell {
     
     private func setupCellView() {
         addSubview(titleLabel)
+        addSubview(categoryLabel)
         activateRegularConstraints()
     }
     
     private func activateRegularConstraints() {
         NSLayoutConstraint.activate([
+            categoryLabel.topAnchor.constraint(
+                equalTo: self.topAnchor, constant: 8),
+            categoryLabel.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor, constant: 8),
             titleLabel.topAnchor.constraint(
-                equalTo: self.topAnchor, constant: 4),
+                equalTo: categoryLabel.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor, constant: 4),
-            titleLabel.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor, constant: -4)
+                equalTo: categoryLabel.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
     }
     

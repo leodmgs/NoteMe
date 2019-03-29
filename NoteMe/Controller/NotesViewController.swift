@@ -109,6 +109,12 @@ class NotesViewController: UIViewController {
     func configure(_ cell: NoteCell, at indexPath: IndexPath) {
         let note = fetchedResultsController.object(at: indexPath)
         cell.titleLabel.text = note.title
+        if let category = note.category, let name = category.name {
+            cell.categoryLabel.attributedText =
+                .categoryItemAttributed(forText: name)
+            cell.categoryLabel.backgroundColor =
+                CategoryColor.getColor(id: Int(category.colorId))
+        }
     }
     
     private func fetchNotes() {
@@ -131,10 +137,14 @@ class NotesViewController: UIViewController {
     
     private func activateRegularConstraints() {
         NSLayoutConstraint.activate([
-            notesView.topAnchor.constraint(equalTo: view.topAnchor),
-            notesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            notesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            notesView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            notesView.topAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.topAnchor),
+            notesView.leadingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leadingAnchor),
+            notesView.trailingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.trailingAnchor),
+            notesView.bottomAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.bottomAnchor)
             ])
     }
 

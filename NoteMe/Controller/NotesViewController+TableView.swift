@@ -54,6 +54,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let note = fetchedResultsController.object(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
         onNoteSelected(note)
     }
     
