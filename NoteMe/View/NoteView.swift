@@ -18,11 +18,37 @@ class NoteView: UIView {
         return textField
     }()
     
-    let bottomLine: UIView = {
+    let titleTextFieldBottomLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .lightGray
         return view
+    }()
+    
+    let searchCategoryTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Search category"
+        return textField
+    }()
+    
+    let searchCategoryTextFieldBottomLine: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
+    let categoryCollection: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 5
+        let collectionView = UICollectionView(
+            frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
     }()
     
     let contentsTextView: UITextView = {
@@ -46,8 +72,11 @@ class NoteView: UIView {
     }
     
     private func setupView() {
-        titleTextField.addSubview(bottomLine)
+        titleTextField.addSubview(titleTextFieldBottomLine)
+        searchCategoryTextField.addSubview(searchCategoryTextFieldBottomLine)
         addSubview(titleTextField)
+        addSubview(searchCategoryTextField)
+        addSubview(categoryCollection)
         addSubview(contentsTextView)
         activateRegularConstraints()
     }
@@ -81,22 +110,46 @@ class NoteView: UIView {
             titleTextField.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor, constant: -8),
             
-            bottomLine.topAnchor.constraint(
+            titleTextFieldBottomLine.topAnchor.constraint(
                 equalTo: titleTextField.bottomAnchor, constant: 2),
-            bottomLine.leadingAnchor.constraint(
+            titleTextFieldBottomLine.leadingAnchor.constraint(
                 equalTo: titleTextField.leadingAnchor),
-            bottomLine.trailingAnchor.constraint(
+            titleTextFieldBottomLine.trailingAnchor.constraint(
                 equalTo: titleTextField.trailingAnchor),
-            bottomLine.heightAnchor.constraint(equalToConstant: 0.5),
+            titleTextFieldBottomLine.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            searchCategoryTextField.topAnchor.constraint(
+                equalTo: titleTextFieldBottomLine.bottomAnchor, constant: 18),
+            searchCategoryTextField.leadingAnchor.constraint(
+                equalTo: titleTextField.leadingAnchor),
+            searchCategoryTextField.trailingAnchor.constraint(
+                equalTo: titleTextField.trailingAnchor),
+//            searchTagTextField.heightAnchor.constraint(equalToConstant: 28),
+            
+            searchCategoryTextFieldBottomLine.topAnchor.constraint(
+                equalTo: searchCategoryTextField.bottomAnchor, constant: 2),
+            searchCategoryTextFieldBottomLine.leadingAnchor.constraint(
+                equalTo: searchCategoryTextField.leadingAnchor),
+            searchCategoryTextFieldBottomLine.trailingAnchor.constraint(
+                equalTo: searchCategoryTextField.trailingAnchor),
+            searchCategoryTextFieldBottomLine.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            categoryCollection.topAnchor.constraint(
+                equalTo: searchCategoryTextField.bottomAnchor, constant: 3),
+            categoryCollection.leadingAnchor.constraint(
+                equalTo: searchCategoryTextField.leadingAnchor),
+            categoryCollection.trailingAnchor.constraint(
+                equalTo: searchCategoryTextField.trailingAnchor),
+            categoryCollection.heightAnchor.constraint(equalToConstant: 30),
             
             contentsTextView.topAnchor.constraint(
-                equalTo: titleTextField.bottomAnchor, constant: 20),
+                equalTo: categoryCollection.bottomAnchor, constant: 12),
             contentsTextView.leadingAnchor.constraint(
                 equalTo: titleTextField.leadingAnchor),
             contentsTextView.trailingAnchor.constraint(
                 equalTo: titleTextField.trailingAnchor),
             contentsTextView.bottomAnchor.constraint(
-                equalTo: self.bottomAnchor, constant: -28)
+                equalTo: self.bottomAnchor, constant: -72)
             ])
     }
 }

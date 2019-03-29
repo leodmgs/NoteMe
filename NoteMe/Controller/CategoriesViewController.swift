@@ -12,6 +12,7 @@ import CoreData
 
 class CategoriesViewController: UIViewController {
     
+    // MARK: Unused
     var categories: [Category]?
     
     var managedObjectContext: NSManagedObjectContext?

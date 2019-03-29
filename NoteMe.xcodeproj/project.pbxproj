@@ -11,6 +11,7 @@
 		7A22A30D223BD2E100D85D81 /* NotesViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */; };
 		7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30E223BD5A400D85D81 /* UINotesView.swift */; };
 		7A22A312223BD61E00D85D81 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A311223BD61E00D85D81 /* NoteCell.swift */; };
+		7A34F700224E37C400787B9B /* CategoryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34F6FF224E37C400787B9B /* CategoryItemCell.swift */; };
 		7A5425F9223FC5C0007E6349 /* NoteMe+NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */; };
 		7A5425FB2241331A007E6349 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425FA2241331A007E6349 /* CategoriesViewController.swift */; };
 		7A5425FD22413376007E6349 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5425FC22413376007E6349 /* SettingsViewController.swift */; };
@@ -37,6 +38,7 @@
 		7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotesViewController+TableView.swift"; sourceTree = "<group>"; };
 		7A22A30E223BD5A400D85D81 /* UINotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINotesView.swift; sourceTree = "<group>"; };
 		7A22A311223BD61E00D85D81 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		7A34F6FF224E37C400787B9B /* CategoryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItemCell.swift; sourceTree = "<group>"; };
 		7A5425F8223FC5C0007E6349 /* NoteMe+NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteMe+NSManagedObject.swift"; sourceTree = "<group>"; };
 		7A5425FA2241331A007E6349 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		7A5425FC22413376007E6349 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				7A22A311223BD61E00D85D81 /* NoteCell.swift */,
+				7A34F6FF224E37C400787B9B /* CategoryItemCell.swift */,
 				7A5426062243E605007E6349 /* CategoryCell.swift */,
 				7AFA2B59223BEBCC0094CE20 /* NotesHeaderCell.swift */,
 			);
@@ -279,6 +282,7 @@
 				7A5425F9223FC5C0007E6349 /* NoteMe+NSManagedObject.swift in Sources */,
 				7A5425FF22417760007E6349 /* CategoryView.swift in Sources */,
 				7A22A309223AA39400D85D81 /* AddNoteViewController.swift in Sources */,
+				7A34F700224E37C400787B9B /* CategoryItemCell.swift in Sources */,
 				7A22A30D223BD2E100D85D81 /* NotesViewController+TableView.swift in Sources */,
 				7A5425FD22413376007E6349 /* SettingsViewController.swift in Sources */,
 				7AFA2B61223C25DB0094CE20 /* NoteMe+UIColor.swift in Sources */,
