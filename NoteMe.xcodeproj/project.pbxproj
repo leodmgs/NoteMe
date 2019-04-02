@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A0536DF2253901A007DF75B /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0536DE2253901A007DF75B /* AddTagViewController.swift */; };
+		7A0536E12253A35E007DF75B /* AddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0536E02253A35E007DF75B /* AddTagView.swift */; };
 		7A22A309223AA39400D85D81 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A308223AA39400D85D81 /* AddNoteViewController.swift */; };
 		7A22A30D223BD2E100D85D81 /* NotesViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */; };
 		7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A30E223BD5A400D85D81 /* UINotesView.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A0536DE2253901A007DF75B /* AddTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
+		7A0536E02253A35E007DF75B /* AddTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagView.swift; sourceTree = "<group>"; };
 		7A22A308223AA39400D85D81 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotesViewController+TableView.swift"; sourceTree = "<group>"; };
 		7A22A30E223BD5A400D85D81 /* UINotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINotesView.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				7A5425FE22417760007E6349 /* CategoryView.swift */,
 				7A5426022242E24F007E6349 /* CategoryColorView.swift */,
 				7AFA2B5D223BFCCF0094CE20 /* NoteView.swift */,
+				7A0536E02253A35E007DF75B /* AddTagView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,12 +159,13 @@
 			children = (
 				7A9AC90522320AAF00965B9B /* Main */,
 				7A9AC8ED2231FDB900965B9B /* NotesViewController.swift */,
+				7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */,
+				7A22A308223AA39400D85D81 /* AddNoteViewController.swift */,
 				7AFA2B5B223BFC3F0094CE20 /* EditNoteViewController.swift */,
 				7A5425FA2241331A007E6349 /* CategoriesViewController.swift */,
 				7A54260022417F52007E6349 /* AddCategoryViewController.swift */,
+				7A0536DE2253901A007DF75B /* AddTagViewController.swift */,
 				7A5425FC22413376007E6349 /* SettingsViewController.swift */,
-				7A22A30C223BD2E100D85D81 /* NotesViewController+TableView.swift */,
-				7A22A308223AA39400D85D81 /* AddNoteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -305,7 +311,9 @@
 				7A5426052243CC4B007E6349 /* NoteMe+UIButton.swift in Sources */,
 				7A22A30F223BD5A400D85D81 /* UINotesView.swift in Sources */,
 				7A9AC90822320E2700965B9B /* CoreDataBroker.swift in Sources */,
+				7A0536DF2253901A007DF75B /* AddTagViewController.swift in Sources */,
 				7A34F706224E487000787B9B /* CategoryItem+NSAttributedString.swift in Sources */,
+				7A0536E12253A35E007DF75B /* AddTagView.swift in Sources */,
 				7A54260122417F52007E6349 /* AddCategoryViewController.swift in Sources */,
 				7AFA2B5C223BFC3F0094CE20 /* EditNoteViewController.swift in Sources */,
 				7A5425FB2241331A007E6349 /* CategoriesViewController.swift in Sources */,

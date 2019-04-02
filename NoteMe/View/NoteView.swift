@@ -51,6 +51,13 @@ class NoteView: UIView {
         return collectionView
     }()
     
+    let addTagButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(named: "tag-add"), for: .normal)
+        return button
+    }()
+    
     let contentsTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +84,7 @@ class NoteView: UIView {
         addSubview(titleTextField)
         addSubview(searchCategoryTextField)
         addSubview(categoryCollection)
+        addSubview(addTagButton)
         addSubview(contentsTextView)
         activateRegularConstraints()
     }
@@ -142,8 +150,15 @@ class NoteView: UIView {
                 equalTo: searchCategoryTextField.trailingAnchor),
             categoryCollection.heightAnchor.constraint(equalToConstant: 30),
             
+            addTagButton.topAnchor.constraint(
+                equalTo: categoryCollection.bottomAnchor, constant: 8),
+            addTagButton.leadingAnchor.constraint(
+                equalTo: searchCategoryTextField.leadingAnchor),
+            addTagButton.heightAnchor.constraint(equalToConstant: 24),
+            addTagButton.widthAnchor.constraint(equalToConstant: 24),
+            
             contentsTextView.topAnchor.constraint(
-                equalTo: categoryCollection.bottomAnchor, constant: 12),
+                equalTo: addTagButton.bottomAnchor, constant: 12),
             contentsTextView.leadingAnchor.constraint(
                 equalTo: titleTextField.leadingAnchor),
             contentsTextView.trailingAnchor.constraint(

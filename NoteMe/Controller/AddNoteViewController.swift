@@ -43,6 +43,7 @@ class AddNoteViewController: UIViewController {
         return view
     }()
     
+    var tags: [String]?
     var categoriesDatasource: [Category]?
     var selectedCategory: SelectedCategory?
     
@@ -57,6 +58,15 @@ class AddNoteViewController: UIViewController {
             CategoryItemCell.self,
             forCellWithReuseIdentifier: CategoryItemCell.identifier)
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear")
+        if let tags = tags {
+            for tag in tags {
+                print(tag)
+            }
+        }
     }
     
     private func loadCategoryDatasource() {
@@ -76,6 +86,8 @@ class AddNoteViewController: UIViewController {
         DispatchQueue.main.async {
             self.view.backgroundColor = .white
         }
+        noteView.addTagButton.addTarget(
+            self, action: #selector(onAddTagTapped), for: .touchUpInside)
         view.addSubview(noteView)
         activateRegularConstraints()
     }
@@ -107,6 +119,18 @@ class AddNoteViewController: UIViewController {
             action: #selector(onCancelTapped))
         navigationItem.rightBarButtonItem = saveButtonItem
         navigationItem.leftBarButtonItem = discardButtonItem
+    }
+    
+    @objc private func onAddTagTapped() {
+        guard let navController = navigationController else { return }
+        let addTagViewController = AddTagViewController()
+        if let tags = tags {
+            addTagViewController.tags = tags
+        } else {
+            addTagViewController.tags = []
+        }
+        addTagViewController.delegate = self
+        navController.pushViewController(addTagViewController, animated: true)
     }
     
     @objc private func onCancelTapped() {
@@ -157,6 +181,15 @@ class AddNoteViewController: UIViewController {
         return attributedText
     }
     
+}
+
+extension AddNoteViewController: AddTagViewControllerDelegate {
+
+    func didTagListUpdated(for tags: [String]) {
+        print("notification received")
+        self.tags = tags
+    }
+
 }
 
 extension AddNoteViewController: UITextFieldDelegate {
