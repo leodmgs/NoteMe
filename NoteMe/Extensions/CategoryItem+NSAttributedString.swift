@@ -10,7 +10,19 @@ import Foundation
 import UIKit
 
 extension NSAttributedString {
-    static func categoryItemAttributed(forText text: String) -> NSAttributedString {
-        return NSAttributedString(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)])
+    
+    static func smallTextAttributed(
+        forText text: String) -> NSAttributedString {
+        return NSAttributedString(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.light)])
+    }
+    
+    static func regularTextAttributed(
+        forText text: String) -> NSAttributedString {
+        return NSAttributedString(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)])
+    }
+    
+    static func titleTextAttributed(
+        forText text: String) -> NSAttributedString {
+        return NSAttributedString(string: text, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)])
     }
 }

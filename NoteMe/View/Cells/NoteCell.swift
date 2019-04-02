@@ -16,6 +16,7 @@ class NoteCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
         return label
     }()
     
@@ -25,6 +26,13 @@ class NoteCell: UITableViewCell {
         label.layer.cornerRadius = 3
         label.clipsToBounds = true
         label.textInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        return label
+    }()
+    
+    let updatedNoteLabel: EdgeInsetLabel = {
+        let label = EdgeInsetLabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.attributedText = .smallTextAttributed(forText: "03/29/2019")
         return label
     }()
     
@@ -40,6 +48,7 @@ class NoteCell: UITableViewCell {
     private func setupCellView() {
         addSubview(titleLabel)
         addSubview(categoryLabel)
+        addSubview(updatedNoteLabel)
         activateRegularConstraints()
     }
     
@@ -49,6 +58,10 @@ class NoteCell: UITableViewCell {
                 equalTo: self.topAnchor, constant: 8),
             categoryLabel.leadingAnchor.constraint(
                 equalTo: self.leadingAnchor, constant: 8),
+            updatedNoteLabel.topAnchor.constraint(
+                equalTo: self.topAnchor, constant: 8),
+            updatedNoteLabel.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor, constant: -8),
             titleLabel.topAnchor.constraint(
                 equalTo: categoryLabel.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(

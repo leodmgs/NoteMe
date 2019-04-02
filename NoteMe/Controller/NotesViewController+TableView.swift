@@ -49,7 +49,10 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(60)
+        if indexPath.section == 0 {
+            return 90
+        }
+        return 40
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

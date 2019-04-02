@@ -108,12 +108,21 @@ class NotesViewController: UIViewController {
      */
     func configure(_ cell: NoteCell, at indexPath: IndexPath) {
         let note = fetchedResultsController.object(at: indexPath)
-        cell.titleLabel.text = note.title
-        if let category = note.category, let name = category.name {
-            cell.categoryLabel.attributedText =
-                .categoryItemAttributed(forText: name)
+        guard let noteTitle = note.title else {
+            fatalError("Note title has not been defined!")
+        }
+        cell.titleLabel.attributedText = .titleTextAttributed(forText: noteTitle)
+        if let category = note.category, let name = category.name,
+            let updated = note.updatedAt {
+            cell.categoryLabel.attributedText = .smallTextAttributed(forText: name)
             cell.categoryLabel.backgroundColor =
                 CategoryColor.getColor(id: Int(category.colorId))
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Locale(identifier: "en_US")
+            cell.updatedNoteLabel.attributedText =
+                .smallTextAttributed(forText: dateFormatter.string(from: updated))
         }
     }
     
@@ -190,6 +199,8 @@ extension NotesViewController: NSFetchedResultsControllerDelegate {
             if let newIndexPath = newIndexPath {
                 notesView.notesTableView.insertRows(at: [newIndexPath], with: .fade)
             }
+        default:
+            print("Option not supported!")
         }
     }
     
