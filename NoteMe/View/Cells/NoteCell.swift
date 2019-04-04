@@ -89,16 +89,27 @@ class NoteCell: UITableViewCell {
     
     private func attributedTags(for tags: [Tag]) -> NSMutableAttributedString {
         let attributedTags = NSMutableAttributedString()
+        let availableWidth = UIScreen.main.bounds.width - 80
+        var tagCounter = 0
         for tag in tags {
             if let name = tag.name {
-                attributedTags.append(NSAttributedString(
+                let attrString = NSAttributedString(
                     string: " \(name) ",
                     attributes: [.font : UIFont.systemFont(
                         ofSize: 11,
                         weight: UIFont.Weight.bold),
                                  .foregroundColor: UIColor.gray,
-                                 .backgroundColor: UIColor.noteLightGray]))
-                attributedTags.append(NSAttributedString(string: "  "))
+                                 .backgroundColor: UIColor.noteLightGray])
+                if (attributedTags.size().width + attrString.size().width) > availableWidth {
+                    attributedTags.append(
+                        NSAttributedString(string: " +\(tags.count - tagCounter)",
+                        attributes: [.font : UIFont.systemFont(ofSize: 11, weight: UIFont.Weight.bold), .foregroundColor: UIColor.gray]))
+                    break
+                } else {
+                    tagCounter += 1
+                    attributedTags.append(attrString)
+                    attributedTags.append(NSAttributedString(string: "  "))
+                }
             }
         }
         return attributedTags

@@ -58,6 +58,12 @@ class NoteView: UIView {
         return button
     }()
     
+    private let tagsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let contentsTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,8 +91,50 @@ class NoteView: UIView {
         addSubview(searchCategoryTextField)
         addSubview(categoryCollection)
         addSubview(addTagButton)
+        addSubview(tagsLabel)
+//        addSubview(tagsCollectionLabel)
         addSubview(contentsTextView)
         activateRegularConstraints()
+    }
+    
+    // FIXME: create an extension of Note to provide this method.
+    func setAttributedTags(for tags: [Tag]) {
+        
+        let attributedTags = NSMutableAttributedString()
+        attributedTags.append(NSAttributedString(
+            string: "Tags: ",
+            attributes: [
+                .font :
+                    UIFont.systemFont(ofSize: 11, weight: .semibold),
+                .foregroundColor: UIColor.gray
+            ]))
+        
+        // 20 width of label with the remaining counter
+        let widthSize = self.layer.bounds.width - addTagButton.bounds.width - attributedTags.size().width - 20
+        
+        var tagCounter = 0
+        for tag in tags {
+            if let name = tag.name {
+                let attrString = NSAttributedString(
+                    string: " \(name) ",
+                    attributes: [.font : UIFont.systemFont(
+                        ofSize: 11,
+                        weight: UIFont.Weight.bold),
+                                 .foregroundColor: UIColor.gray,
+                                 .backgroundColor: UIColor.noteLightGray])
+                if (attributedTags.size().width + attrString.size().width) > widthSize {
+                    attributedTags.append(
+                        NSAttributedString(string: " +\(tags.count - tagCounter)",
+                            attributes: [.font : UIFont.systemFont(ofSize: 11, weight: UIFont.Weight.bold), .foregroundColor: UIColor.gray]))
+                    break
+                } else {
+                    tagCounter += 1
+                    attributedTags.append(attrString)
+                    attributedTags.append(NSAttributedString(string: "  "))
+                }
+            }
+        }
+        tagsLabel.attributedText = attributedTags
     }
     
     func showAlertForNote(
@@ -132,7 +180,6 @@ class NoteView: UIView {
                 equalTo: titleTextField.leadingAnchor),
             searchCategoryTextField.trailingAnchor.constraint(
                 equalTo: titleTextField.trailingAnchor),
-//            searchTagTextField.heightAnchor.constraint(equalToConstant: 28),
             
             searchCategoryTextFieldBottomLine.topAnchor.constraint(
                 equalTo: searchCategoryTextField.bottomAnchor, constant: 2),
@@ -140,7 +187,8 @@ class NoteView: UIView {
                 equalTo: searchCategoryTextField.leadingAnchor),
             searchCategoryTextFieldBottomLine.trailingAnchor.constraint(
                 equalTo: searchCategoryTextField.trailingAnchor),
-            searchCategoryTextFieldBottomLine.heightAnchor.constraint(equalToConstant: 0.5),
+            searchCategoryTextFieldBottomLine.heightAnchor.constraint(
+                equalToConstant: 0.5),
             
             categoryCollection.topAnchor.constraint(
                 equalTo: searchCategoryTextField.bottomAnchor, constant: 3),
@@ -156,6 +204,12 @@ class NoteView: UIView {
                 equalTo: searchCategoryTextField.leadingAnchor),
             addTagButton.heightAnchor.constraint(equalToConstant: 24),
             addTagButton.widthAnchor.constraint(equalToConstant: 24),
+            
+            tagsLabel.leadingAnchor.constraint(
+                equalTo: addTagButton.trailingAnchor, constant: 8),
+            tagsLabel.centerYAnchor.constraint(
+                equalTo: addTagButton.centerYAnchor),
+            tagsLabel.trailingAnchor.constraint(equalTo: searchCategoryTextField.trailingAnchor),
             
             contentsTextView.topAnchor.constraint(
                 equalTo: addTagButton.bottomAnchor, constant: 12),

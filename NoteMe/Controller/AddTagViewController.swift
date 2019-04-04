@@ -137,33 +137,3 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
-
-class TagCell: UITableViewCell {
-    
-    static let identifier = "com.leodmgs.NoteMe.TagCell.identifier"
-    
-    let tagName: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViewCell()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    private func setupViewCell() {
-        backgroundColor = .white
-        addSubview(tagName)
-        activateRegularConstraints()
-    }
-    private func activateRegularConstraints() {
-        NSLayoutConstraint.activate([
-            tagName.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-            ])
-    }
-}

@@ -180,6 +180,7 @@ extension AddNoteViewController: AddTagViewControllerDelegate {
 
     func didTagListUpdated(for tags: [Tag]) {
         self.tags = tags
+        noteView.setAttributedTags(for: tags)
     }
 
 }
