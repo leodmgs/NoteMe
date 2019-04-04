@@ -43,7 +43,7 @@ class AddNoteViewController: UIViewController {
         return view
     }()
     
-    var tags: [String]?
+    var tags: [Tag]?
     var categoriesDatasource: [Category]?
     var selectedCategory: SelectedCategory?
     
@@ -58,15 +58,6 @@ class AddNoteViewController: UIViewController {
             CategoryItemCell.self,
             forCellWithReuseIdentifier: CategoryItemCell.identifier)
         setupView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
-        if let tags = tags {
-            for tag in tags {
-                print(tag)
-            }
-        }
     }
     
     private func loadCategoryDatasource() {
@@ -124,10 +115,9 @@ class AddNoteViewController: UIViewController {
     @objc private func onAddTagTapped() {
         guard let navController = navigationController else { return }
         let addTagViewController = AddTagViewController()
+        addTagViewController.managedObjectContext = self.managedObjectContext
         if let tags = tags {
             addTagViewController.tags = tags
-        } else {
-            addTagViewController.tags = []
         }
         addTagViewController.delegate = self
         navController.pushViewController(addTagViewController, animated: true)
@@ -173,6 +163,9 @@ class AddNoteViewController: UIViewController {
         if let selected = selectedCategory {
             note.category = selected.category
         }
+        if let tags = tags {
+            note.tags = NSSet(array: tags)
+        }
         note.contents = noteView.contentsTextView.text
     }
     
@@ -185,8 +178,7 @@ class AddNoteViewController: UIViewController {
 
 extension AddNoteViewController: AddTagViewControllerDelegate {
 
-    func didTagListUpdated(for tags: [String]) {
-        print("notification received")
+    func didTagListUpdated(for tags: [Tag]) {
         self.tags = tags
     }
 

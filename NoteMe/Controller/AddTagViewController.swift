@@ -11,13 +11,15 @@ import UIKit
 import CoreData
 
 protocol AddTagViewControllerDelegate {
-    func didTagListUpdated(for tags: [String])
+    func didTagListUpdated(for tags: [Tag])
 }
 
 class AddTagViewController: UIViewController {
     
+    var managedObjectContext: NSManagedObjectContext?
+    
     var delegate: AddTagViewControllerDelegate?
-    var tags: [String]?
+    var tags: [Tag] = []
     
     let addTagView: AddTagView = {
         let view = AddTagView()
@@ -60,24 +62,34 @@ class AddTagViewController: UIViewController {
     }
     
     @objc private func onCancelTapped() {
-        print("Cancel")
         popViewController()
     }
     
     private func popViewController() {
-        if let delegate = delegate, let tagList = tags {
-            delegate.didTagListUpdated(for: tagList)
-        }
         _ = navigationController?.popViewController(animated: true)
     }
     
     @objc private func onSaveTapped() {
+        if let delegate = delegate {
+            delegate.didTagListUpdated(for: tags)
+        }
         popViewController()
     }
     
     @objc private func onAddTag() {
-        guard let tagName = addTagView.tagTitle.text else { return }
-        tags?.append(tagName)
+        guard let tagName = addTagView.tagTitle.text,
+            let manageObjectContext = managedObjectContext else { return }
+        let tag = Tag(context: manageObjectContext)
+        
+        // trimmingCharacters function remove all leading and trailing space
+        // charactes
+        var nameFormatted = tagName.lowercased().trimmingCharacters(
+            in: NSCharacterSet.whitespacesAndNewlines)
+        if !nameFormatted.starts(with: "#") {
+            nameFormatted = "#\(nameFormatted)"
+        }
+        tag.name = nameFormatted
+        tags.append(tag)
         DispatchQueue.main.async {
             self.addTagView.tagsTableView.reloadData()
         }
@@ -103,14 +115,13 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-        guard let tags = tags else { return 0 }
         return tags.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tagCell = tableView.dequeueReusableCell(
             withIdentifier: TagCell.identifier) as! TagCell
-        tagCell.tagName.text = tags?[indexPath.item]
+        tagCell.tagName.text = tags[indexPath.item].name
         return tagCell
     }
     
@@ -120,7 +131,7 @@ extension AddTagViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tags?.remove(at: indexPath.item)
+            tags.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

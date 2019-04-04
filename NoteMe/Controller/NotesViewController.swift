@@ -113,7 +113,7 @@ class NotesViewController: UIViewController {
         }
         cell.titleLabel.attributedText = .titleTextAttributed(forText: noteTitle)
         if let category = note.category, let name = category.name,
-            let updated = note.updatedAt {
+            let updated = note.updatedAt, let tags = note.tags {
             cell.categoryLabel.attributedText = .smallTextAttributed(forText: name)
             cell.categoryLabel.backgroundColor =
                 CategoryColor.getColor(id: Int(category.colorId))
@@ -123,6 +123,7 @@ class NotesViewController: UIViewController {
             dateFormatter.locale = Locale(identifier: "en_US")
             cell.updatedNoteLabel.attributedText =
                 .smallTextAttributed(forText: dateFormatter.string(from: updated))
+            cell.tags = tags.allObjects as? [Tag]
         }
     }
     

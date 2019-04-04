@@ -36,6 +36,18 @@ class NoteCell: UITableViewCell {
         return label
     }()
     
+    var tags: [Tag]? {
+        didSet {
+            guard let tags = tags else { return }
+            tagsLabel.attributedText = attributedTags(for: tags)
+        }
+    }
+    private let tagsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCellView()
@@ -49,6 +61,7 @@ class NoteCell: UITableViewCell {
         addSubview(titleLabel)
         addSubview(categoryLabel)
         addSubview(updatedNoteLabel)
+        addSubview(tagsLabel)
         activateRegularConstraints()
     }
     
@@ -66,8 +79,29 @@ class NoteCell: UITableViewCell {
                 equalTo: categoryLabel.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(
                 equalTo: categoryLabel.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            tagsLabel.topAnchor.constraint(
+                equalTo: titleLabel.bottomAnchor, constant: 8),
+            tagsLabel.leadingAnchor.constraint(
+                equalTo: self.leadingAnchor, constant: 8)
             ])
+    }
+    
+    private func attributedTags(for tags: [Tag]) -> NSMutableAttributedString {
+        let attributedTags = NSMutableAttributedString()
+        for tag in tags {
+            if let name = tag.name {
+                attributedTags.append(NSAttributedString(
+                    string: " \(name) ",
+                    attributes: [.font : UIFont.systemFont(
+                        ofSize: 11,
+                        weight: UIFont.Weight.bold),
+                                 .foregroundColor: UIColor.gray,
+                                 .backgroundColor: UIColor.noteLightGray]))
+                attributedTags.append(NSAttributedString(string: "  "))
+            }
+        }
+        return attributedTags
     }
     
 }
