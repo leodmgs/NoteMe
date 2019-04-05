@@ -92,7 +92,6 @@ class NoteView: UIView {
         addSubview(categoryCollection)
         addSubview(addTagButton)
         addSubview(tagsLabel)
-//        addSubview(tagsCollectionLabel)
         addSubview(contentsTextView)
         activateRegularConstraints()
     }

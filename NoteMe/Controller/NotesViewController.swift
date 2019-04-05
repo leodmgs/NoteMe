@@ -82,7 +82,8 @@ class NotesViewController: UIViewController {
     @objc private func onAddNoteTapped() {
         guard let navController = navigationController else { return }
         let addNoteViewController = AddNoteViewController()
-        addNoteViewController.managedObjectContext = coreDataBroker.managedObjectContext
+        addNoteViewController.managedObjectContext =
+            coreDataBroker.managedObjectContext
         navController.pushViewController(addNoteViewController, animated: true)
     }
 
@@ -97,6 +98,8 @@ class NotesViewController: UIViewController {
     func onNoteSelected(_ note: Note) {
         guard let navController = navigationController else { return }
         let editNoteViewController = EditNoteViewController()
+        editNoteViewController.managedObjectContext =
+            coreDataBroker.managedObjectContext
         editNoteViewController.note = note
         navController.pushViewController(editNoteViewController, animated: true)
     }
