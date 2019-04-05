@@ -16,6 +16,13 @@ class NoteCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    let previewContents: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         return label
     }()
@@ -59,6 +66,7 @@ class NoteCell: UITableViewCell {
     
     private func setupCellView() {
         addSubview(titleLabel)
+        addSubview(previewContents)
         addSubview(categoryLabel)
         addSubview(updatedNoteLabel)
         addSubview(tagsLabel)
@@ -80,10 +88,16 @@ class NoteCell: UITableViewCell {
             titleLabel.leadingAnchor.constraint(
                 equalTo: categoryLabel.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            tagsLabel.topAnchor.constraint(
-                equalTo: titleLabel.bottomAnchor, constant: 8),
+            previewContents.topAnchor.constraint(
+                equalTo: titleLabel.bottomAnchor, constant: 4),
+            previewContents.leadingAnchor.constraint(
+                equalTo: categoryLabel.leadingAnchor),
+            previewContents.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor),
             tagsLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor, constant: 8)
+                equalTo: self.leadingAnchor, constant: 8),
+            tagsLabel.bottomAnchor.constraint(
+                equalTo: self.bottomAnchor, constant: -16),
             ])
     }
     
