@@ -50,9 +50,9 @@ class NotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchNotes()
         setupNavigationBar()
         setupView()
-        fetchNotes()
     }
     
     private func setupNavigationBar() {
@@ -113,10 +113,12 @@ class NotesViewController: UIViewController {
         }
         cell.titleLabel.attributedText = .titleTextAttributed(forText: noteTitle)
         if let category = note.category, let name = category.name,
-            let updated = note.updatedAt, let tags = note.tags {
+            let updated = note.updatedAt, let tags = note.tags,
+            let contents = note.contents {
             cell.categoryLabel.attributedText = .smallTextAttributed(forText: name)
             cell.categoryLabel.backgroundColor =
                 CategoryColor.getColor(id: Int(category.colorId))
+            cell.previewContents.attributedText = .smallTextAttributed(forText: contents)
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .none

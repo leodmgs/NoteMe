@@ -50,9 +50,25 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 90
+            if let sections = fetchedResultsController.sections,
+                let notesObject = sections[indexPath.section].objects as? [Note] {
+                if let title = notesObject[indexPath.item].title {
+                    let titleHeightSize =
+                        estimatedBoundingTextViewSize(text: title).height
+                    let totalConstraintsOffset: CGFloat = 110
+                    return titleHeightSize + totalConstraintsOffset
+                }
+            }
         }
         return 40
+    }
+    
+    func estimatedBoundingTextViewSize(text: String, offset: CGFloat = 0) -> CGSize {
+        let textViewFrameWidth = view.frame.width - 82
+        let textViewFrameSize = CGSize(width: textViewFrameWidth, height: 1000)
+        let fontAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.bold)]
+        let boundingSize = NSString(string: text).boundingRect(with: textViewFrameSize, options: .usesLineFragmentOrigin, attributes: fontAttributes, context: nil)
+        return CGSize(width: textViewFrameWidth, height: boundingSize.height + offset)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
