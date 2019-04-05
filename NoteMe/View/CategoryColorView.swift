@@ -97,6 +97,7 @@ struct CategoryColor {
         static let green: Int = 2
         static let red: Int = 3
         static let magenta: Int = 4
+        static let lightGray: Int = 5
     }
     
     static let count: Int = 5
@@ -113,6 +114,8 @@ struct CategoryColor {
             return self.red
         case self.Id.magenta:
             return self.magenta
+        case self.Id.lightGray:
+            return self.lightGray
         default:
             return UIColor.white
         }
@@ -145,6 +148,12 @@ struct CategoryColor {
     static var magenta: UIColor {
         get {
             return UIColor(red: 0.77, green: 0.56, blue: 0.82, alpha: 1.0)
+        }
+    }
+    
+    static var lightGray: UIColor {
+        get {
+            return UIColor(red: 0.92, green: 0.92, blue: 0.93, alpha: 1.0)
         }
     }
     

@@ -55,6 +55,15 @@ class NotesViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if coreDataBroker.managedObjectContext.hasChanges {
+            fetchNotes()
+            DispatchQueue.main.async {
+                self.notesView.notesTableView.reloadData()
+            }
+        }
+    }
+    
     private func setupNavigationBar() {
         guard let navController = navigationController else { return }
         navController.navigationBar.isTranslucent = false
@@ -115,12 +124,21 @@ class NotesViewController: UIViewController {
             fatalError("Note title has not been defined!")
         }
         cell.titleLabel.attributedText = .titleTextAttributed(forText: noteTitle)
-        if let category = note.category, let name = category.name,
-            let updated = note.updatedAt, let tags = note.tags,
-            let contents = note.contents {
+        
+        if let category = note.category, let name = category.name {
             cell.categoryLabel.attributedText = .smallTextAttributed(forText: name)
             cell.categoryLabel.backgroundColor =
                 CategoryColor.getColor(id: Int(category.colorId))
+        } else {
+            cell.categoryLabel.attributedText =
+                .smallTextAttributed(forText: "Undefined")
+            cell.categoryLabel.backgroundColor =
+                CategoryColor.getColor(id: CategoryColor.Id.lightGray)
+        }
+        
+        if let updated = note.updatedAt, let tags = note.tags,
+            let contents = note.contents {
+            
             cell.previewContents.attributedText = .smallTextAttributed(forText: contents)
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium

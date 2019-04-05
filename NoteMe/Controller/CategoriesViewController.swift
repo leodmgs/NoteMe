@@ -173,8 +173,16 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let category = fetchedResultsController.object(at: indexPath)
-            managedObjectContext?.delete(category)
+            let alert = UIAlertController(
+                title: "Are you sure?",
+                message: "This Category can belongs to some Note.",
+                preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                let category = self.fetchedResultsController.object(at: indexPath)
+                self.managedObjectContext?.delete(category)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
