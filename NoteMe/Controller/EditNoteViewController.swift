@@ -37,9 +37,16 @@ class EditNoteViewController: UIViewController {
                 }
                 noteView.contentsTextView.text = contents
             }
+            if let tags = noteObject.tags?.allObjects as? [Tag] {
+                self.tags = tags
+                DispatchQueue.main.async {
+                    self.noteView.setAttributedTags(for: tags)
+                }
+            }
         }
     }
     
+    var tags: [Tag]?
     var categoriesDatasource: [Category]?
     var selectedCategory: SelectedCategory?
     
@@ -82,6 +89,10 @@ class EditNoteViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(noteView)
+        noteView.addTagButton.addTarget(
+            self,
+            action: #selector(onAddTagTapped),
+            for: .touchUpInside)
         activateRegularConstraints()
     }
     
@@ -96,6 +107,17 @@ class EditNoteViewController: UIViewController {
     @objc private func onSaveChangesTapped() {
         saveChanges()
         popViewController()
+    }
+    
+    @objc private func onAddTagTapped() {
+        guard let navController = navigationController else { return }
+        let addTagViewController = AddTagViewController()
+        addTagViewController.managedObjectContext = self.managedObjectContext
+        if let tags = tags {
+            addTagViewController.tags = tags
+        }
+        addTagViewController.delegate = self
+        navController.pushViewController(addTagViewController, animated: true)
     }
     
     private func saveChanges() {
@@ -115,9 +137,9 @@ class EditNoteViewController: UIViewController {
         if let selected = selectedCategory {
             note?.category = selected.category
         }
-//        if let tags = tags {
-//            note.tags = NSSet(array: tags)
-//        }
+        if let tags = tags {
+            note?.tags = NSSet(array: tags)
+        }
         note?.contents = noteView.contentsTextView.text
         
     }
@@ -145,6 +167,15 @@ class EditNoteViewController: UIViewController {
             print("Unable to Fetch Categories")
             print("\(error), \(error.localizedDescription)")
         }
+    }
+    
+}
+
+extension EditNoteViewController: AddTagViewControllerDelegate {
+    
+    func didTagListUpdated(for tags: [Tag]) {
+        self.tags = tags
+        noteView.setAttributedTags(for: tags)
     }
     
 }
