@@ -12,9 +12,6 @@ import CoreData
 
 class CategoriesViewController: UIViewController {
     
-    // MARK: Unused
-    var categories: [Category]?
-    
     var managedObjectContext: NSManagedObjectContext?
     
     lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
@@ -38,9 +35,9 @@ class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchCategories()
         setupNavigationBar()
         setupView()
-        fetchCategories()
     }
     
     private func fetchCategories() {
@@ -168,7 +165,17 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
-        // TODO
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let category = fetchedResultsController.object(at: indexPath)
+            managedObjectContext?.delete(category)
+        }
     }
 }
 

@@ -28,13 +28,6 @@ class CategoryCell: UITableViewCell {
         return label
     }()
     
-    let nextImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "next")
-        return imageView
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCellView()
@@ -48,7 +41,6 @@ class CategoryCell: UITableViewCell {
         backgroundColor = .white
         addSubview(categoryColor)
         addSubview(titleLabel)
-        addSubview(nextImageView)
         activateRegularConstraints()
     }
     
@@ -62,13 +54,7 @@ class CategoryCell: UITableViewCell {
             
             titleLabel.leadingAnchor.constraint(
                 equalTo: categoryColor.trailingAnchor, constant: 10),
-            titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-            nextImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            nextImageView.trailingAnchor.constraint(
-                equalTo: self.layoutMarginsGuide.trailingAnchor, constant: -10),
-            nextImageView.widthAnchor.constraint(equalToConstant: 8),
-            nextImageView.heightAnchor.constraint(equalToConstant: 16)
+            titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
             ])
     }
     
